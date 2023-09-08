@@ -1,5 +1,5 @@
 export class Store {
-    dataList: any[] = [];
+    private dataList: any[] = [];
 
 
     public constructor(dataList: any[]) {
