@@ -16,7 +16,7 @@ export class Store {
     }
 
     /**
-     * This method checks data serializability of a data
+     * This method checks data serializability
      * @param data - Data object
      */
     private checkSerializability(data? : any) : boolean {
