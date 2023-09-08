@@ -5,7 +5,7 @@ export class Main {
     public store: Store = new Store(data);
 
     /**
-     * This method is used to test all store class methods
+     * This method tests all store class methods
      */
     public testStore() {
         this.store.displayAllStoredValues();

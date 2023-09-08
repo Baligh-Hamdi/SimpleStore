@@ -7,13 +7,18 @@ export class Store {
     }
 
     /**
-     * This method checks data serializability before storing it in the dataList array
+     * This method stores data in the dataList array
      * @param data - Data object  which represents the data to store
      */
     public storeData(data?: any) {
         if (this.checkSerializability(data)) this.dataList.push(data);
         else console.error("Please check data structure !");
     }
+
+    /**
+     * This method checks data serializability of a data
+     * @param data - Data object
+     */
     private checkSerializability(data? : any) : boolean {
         return data && JSON.stringify(data) !== undefined;
     }
@@ -42,35 +47,35 @@ export class Store {
      */
     public displayDataContent(index: number) {
         if (this.dataList[index]) console.log(this.dataList[index]);
-        else console.log("Data not found !");
+        else console.error("Data not found !");
     }
 
 
     // These are examples of writing operations
     /**
-    * This method is used to update user photo
+    * This method is used to update a data photo
     * @param index - number input represents the data index in the dataList array
     * @param photoUrl - string representing the new photo url to add
     */
     public updateUserPhoto(index: number, photoUrl: string) {
         if (this.dataList[index]) {
             this.dataList[index].photoUrl = photoUrl;
-        } else console.log("Data not found !");
+        } else console.error("Data not found !");
     }
 
     /**
-     * This method is used to update user address
+     * This method is used to update a data address
      * @param index - number input represents the data index in the dataList array
      * @param address - Address object representing the new address to add
     */
     public updateUserAddress(index: number, address: any) {
         if (this.dataList[index]) {
             this.dataList[index].address = address;
-        } else console.log("Data not found !");
+        } else console.error("Data not found !");
     }
 
     /**
-        * This method is used to update user city
+        * This method is used to update a data city
         * @param index - number input represents the data index in the dataList array
         * @param city - string representing the new city to add
     */
@@ -78,7 +83,7 @@ export class Store {
         if (this.dataList[index]) {
             // usage of nested keys
             this.dataList[index].address.city = city;
-        } else console.log("Data not found !");
+        } else console.error("Data not found !");
     }
 }
 
