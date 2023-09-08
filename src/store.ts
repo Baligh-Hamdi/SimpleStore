@@ -1,71 +1,84 @@
-import {Address} from "./models/Address.model";
-import {Data} from "./models/Data.model";
-
 export class Store {
-    dataList: Data[] = [];
+    dataList: any[] = [];
 
-    /*
-     This method checks data serializability before storing it in the dataList array
-        data : User object  which represents the data to store
-     */
-    public storeData(data: Data) {
-        if (data && JSON.stringify(data) != undefined) this.dataList.push(data);
-        else console.log("Please check data structure !");
+
+    public constructor(dataList: any[]) {
+        this.dataList = dataList;
     }
 
-    /*
-     *This method is used to search a data in the stored values by id
-     *id : string variable which represents the data id
+    /**
+     * This method checks data serializability before storing it in the dataList array
+     * @param data - Data object  which represents the data to store
      */
-    public retrieveStoredValue(id: string): Data {
+    public storeData(data?: any) {
+        if (this.checkSerializability(data)) this.dataList.push(data);
+        else console.error("Please check data structure !");
+    }
+    private checkSerializability(data? : any) : boolean {
+        return data && JSON.stringify(data) !== undefined;
+    }
+
+    /**
+     * This method is used to search a data in the stored values by id
+     * @param id - string variable which represents the data id
+     * @returns Data - Data object
+     */
+    public retrieveStoredValue(id: string): any {
         return this.dataList.find(e => e.id == id);
     }
 
-    /*
-     This method is used to display all stored data
+    /**
+     * This method is used to display all stored data
      */
     public displayAllStoredValues() {
-        this.dataList.forEach(user => console.log(user));
+        this.dataList.forEach(data => console.log(data));
     }
 
-    /*
-     This method is used to display a data selected its index in the dataList array
-        id : string variable representing the index of the data in the dataList array
+
+    // This is an example of reading operation
+    /**
+     * This method is used to display a data selected its index in the dataList array
+     * @param index - string variable representing the index of the data in the dataList array
      */
-    public displayUserContent(index: number) {
+    public displayDataContent(index: number) {
         if (this.dataList[index]) console.log(this.dataList[index]);
         else console.log("Data not found !");
     }
-    /*
+
+
+    // These are examples of writing operations
+    /**
     * This method is used to update user photo
-    * index : number input represents the data index in the dataList array
-    * photoPath : string representing the new photo path to add
-    * */
-    public updateUserPhoto(index: number, photoPath: string) {
+    * @param index - number input represents the data index in the dataList array
+    * @param photoUrl - string representing the new photo url to add
+    */
+    public updateUserPhoto(index: number, photoUrl: string) {
         if (this.dataList[index]) {
-            this.dataList[index].photoPath = photoPath;
+            this.dataList[index].photoUrl = photoUrl;
         } else console.log("Data not found !");
     }
 
-    /*
-        * This method is used to update user address
-        * index : number input represents the data index in the dataList array
-        * address : Address object representing the new address to add
-    * */
-    public updateUserAddress(index: number, address: Address) {
+    /**
+     * This method is used to update user address
+     * @param index - number input represents the data index in the dataList array
+     * @param address - Address object representing the new address to add
+    */
+    public updateUserAddress(index: number, address: any) {
         if (this.dataList[index]) {
-            this.dataList[index].address = Address;
+            this.dataList[index].address = address;
         } else console.log("Data not found !");
     }
 
-    /*
+    /**
         * This method is used to update user city
-        * index : number input represents the data index in the dataList array
-        * city : string representing the new city to add
-    * */
+        * @param index - number input represents the data index in the dataList array
+        * @param city - string representing the new city to add
+    */
     public updateUserCity(index: number, city: string) {
         if (this.dataList[index]) {
+            // usage of nested keys
             this.dataList[index].address.city = city;
         } else console.log("Data not found !");
     }
 }
+
